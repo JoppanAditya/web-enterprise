@@ -26,12 +26,6 @@
                         </div>
                     </div>
 
-                    <?php if ($this->session->flashdata('success')): ?>
-                        <div class="alert alert-success">
-                            <?= $this->session->flashdata('success'); ?>
-                        </div>
-                    <?php endif; ?>
-
                     <table id="dosenTable" class="table table-bordered table-striped">
                         <thead>
                             <tr align="center">
@@ -50,7 +44,7 @@
                                     <td><?= $d->prodi; ?></td>
                                     <td><?= $d->tgl_lahir; ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-search-heart"></i></button>
+                                        <a href="<?= base_url('dosen/detail/' . $d->id); ?>" class="btn btn-primary btn-sm"><i class="bi bi-search-heart"></i></a>
                                         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $d->id; ?>"><i class="bi bi-pencil-square"></i></button>
                                         <a href="<?= base_url('dosen/hapus/' . $d->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="bi bi-trash"></i></a>
                                     </td>

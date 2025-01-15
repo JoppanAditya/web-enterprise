@@ -28,4 +28,9 @@ class M_mata_kuliah extends CI_Model
     {
         return $this->db->delete('tb_mata_kuliah', ['id' => $id]);
     }
+
+    public function count_all()
+    {
+        return $this->db->count_all('tb_mata_kuliah');
+    }
 }

@@ -34,6 +34,8 @@
                                 <th>Nama Mata Kuliah</th>
                                 <th>Kelas</th>
                                 <th>Dosen</th>
+                                <th>Hari</th>
+                                <th>Waktu</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -43,6 +45,8 @@
                                     <td><?= $p->nama_mata_kuliah; ?></td>
                                     <td><?= $p->kelas; ?></td>
                                     <td><?= $p->dosen; ?></td>
+                                    <td><?= $p->hari; ?></td>
+                                    <td><?= $p->waktu; ?></td>
                                     <td>
                                         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $p->id; ?>"><i class="bi bi-pencil-square"></i></button>
                                         <a href="<?= base_url('perkuliahan/hapus/' . $p->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="bi bi-trash"></i></a>
@@ -61,7 +65,7 @@
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label for="nama_mata_kuliah" class="form-label">Nama Mata Kuliah</label>
-                                                    <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah" required>
+                                                    <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah">
                                                         <?php foreach ($mata_kuliah as $mk): ?>
                                                             <option value="<?= $mk->nama; ?>" <?= $mk->nama == $p->nama_mata_kuliah ? 'selected' : ''; ?>><?= $mk->nama; ?></option>
                                                         <?php endforeach; ?>
@@ -70,7 +74,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="kelas" class="form-label">Kelas</label>
-                                                    <select class="form-control" id="kelas" name="kelas" required>
+                                                    <select class="form-control" id="kelas" name="kelas">
                                                         <?php foreach ($kelas as $k): ?>
                                                             <option value="<?= $k->nama; ?>" <?= $k->nama == $p->kelas ? 'selected' : ''; ?>><?= $k->nama; ?></option>
                                                         <?php endforeach; ?>
@@ -79,12 +83,28 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="dosen" class="form-label">Dosen</label>
-                                                    <select class="form-control" id="dosen" name="dosen" required>
+                                                    <select class="form-control" id="dosen" name="dosen">
                                                         <?php foreach ($dosen as $d): ?>
                                                             <option value="<?= $d->nama; ?>" <?= $d->nama == $p->dosen ? 'selected' : ''; ?>><?= $d->nama; ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                     <?= form_error('dosen', '<div class="text-danger">', '</div>'); ?>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="hari" class="form-label">Hari</label>
+                                                    <select class="form-control" id="hari" name="hari">
+                                                        <option value="Senin" <?= $p->hari == 'Senin' ? 'selected' : ''; ?>>Senin</option>
+                                                        <option value="Selasa" <?= $p->hari == 'Selasa' ? 'selected' : ''; ?>>Selasa</option>
+                                                        <option value="Rabu" <?= $p->hari == 'Rabu' ? 'selected' : ''; ?>>Rabu</option>
+                                                        <option value="Kamis" <?= $p->hari == 'Kamis' ? 'selected' : ''; ?>>Kamis</option>
+                                                        <option value="Jumat" <?= $p->hari == 'Jumat' ? 'selected' : ''; ?>>Jumat</option>
+                                                    </select>
+                                                    <?= form_error('hari', '<div class="text-danger">', '</div>'); ?>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="waktu" class="form-label">Waktu</label>
+                                                    <input type="time" class="form-control" id="waktu" name="waktu" value="<?= $p->waktu; ?>">
+                                                    <?= form_error('waktu', '<div class="text-danger">', '</div>'); ?>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -115,7 +135,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="nama_mata_kuliah" class="form-label">Nama Mata Kuliah</label>
-                    <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah" required>
+                    <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah">
                         <option selected disabled>Pilih Mata Kuliah</option>
                         <?php foreach ($mata_kuliah as $mk): ?>
                             <option value="<?= $mk->nama; ?>"><?= $mk->nama; ?></option>
@@ -125,7 +145,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="kelas" class="form-label">Kelas</label>
-                    <select class="form-control" id="kelas" name="kelas" required>
+                    <select class="form-control" id="kelas" name="kelas">
                         <option selected disabled>Pilih Kelas</option>
                         <?php foreach ($kelas as $k): ?>
                             <option value="<?= $k->nama; ?>"><?= $k->nama; ?></option>
@@ -135,13 +155,32 @@
                 </div>
                 <div class="mb-3">
                     <label for="dosen" class="form-label">Dosen</label>
-                    <select class="form-control" id="dosen" name="dosen" required>
+                    <select class="form-control" id="dosen" name="dosen">
                         <option selected disabled>Pilih Dosen</option>
                         <?php foreach ($dosen as $d): ?>
                             <option value="<?= $d->nama; ?>"><?= $d->nama; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <?= form_error('dosen', '<div class="text-danger">', '</div>'); ?>
+                </div>
+                <div class="mb-3">
+                    <label for="hari" class="form-label">Hari</label>
+                    <select class="form-control" id="hari" name="hari">
+                        <option selected disabled>Pilih Hari</option>
+                        <option value="Senin">Senin</option>
+                        <option value="Selasa">Selasa</option>
+                        <option value="Rabu">Rabu</option>
+                        <option value="Kamis">Kamis</option>
+                        <option value="Jumat">Jumat</option>
+                        <option value="Sabtu">Sabtu</option>
+                        <option value="Minggu">Minggu</option>
+                    </select>
+                    <?= form_error('hari', '<div class="text-danger">', '</div>'); ?>
+                </div>
+                <div class="mb-3">
+                    <label for="waktu" class="form-label">Waktu</label>
+                    <input type="time" class="form-control" id="waktu" name="waktu">
+                    <?= form_error('waktu', '<div class="text-danger">', '</div>'); ?>
                 </div>
             </div>
             <div class="modal-footer">

@@ -23,10 +23,4 @@ class M_kelas extends CI_Model
     {
         return $this->db->delete('tb_kelas', ['id' => $id]);
     }
-
-    public function update_supervisor($kelas, $supervisor)
-    {
-        $this->db->where('nama', $kelas);
-        return $this->db->update('tb_kelas', ['supervisor' => $supervisor]);
-    }
 }

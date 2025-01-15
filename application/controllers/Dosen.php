@@ -96,6 +96,21 @@ class Dosen extends CI_Controller
         redirect('dosen');
     }
 
+    public function detail($id)
+    {
+        $this->load->model('M_perkuliahan');
+
+        $data['page'] = 'Dosen';
+        $data['dosen'] = $this->m_dosen->get_by_id($id);
+        $data['jadwal'] = $this->M_perkuliahan->get_jadwal_by_dosen($data['dosen']->nama);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('detail_dosen', $data);
+        $this->load->view('templates/footer');
+    }
+
     private function _validate()
     {
         $this->form_validation->set_rules('nik_nidn', 'NIK/NIDN', 'required');
@@ -114,6 +129,7 @@ class Dosen extends CI_Controller
         $config['max_size'] = 2048;
         $config['file_name'] = $this->input->post('nik_nidn') . '_' . time();
 
+        $this->load->library('upload');
         $this->upload->initialize($config);
 
         if ($this->upload->do_upload('foto')) {

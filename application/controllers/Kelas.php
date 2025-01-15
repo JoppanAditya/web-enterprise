@@ -54,7 +54,6 @@ class Kelas extends CI_Controller
             $data = [
                 'nama' => $this->input->post('nama'),
                 'kapasitas' => $this->input->post('kapasitas'),
-                'supervisor' => $this->input->post('supervisor')
             ];
             $this->m_kelas->update_data($id, $data);
             $this->session->set_flashdata('success', 'Kelas berhasil diupdate');

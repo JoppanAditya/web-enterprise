@@ -29,4 +29,16 @@ class M_dosen extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('tb_dosen', $data);
     }
+
+    public function count_all()
+    {
+        return $this->db->count_all('tb_dosen');
+    }
+
+    public function get_dosen_data()
+    {
+        $this->db->select('prodi, COUNT(*) as total');
+        $this->db->group_by('prodi');
+        return $this->db->get('tb_dosen')->result();
+    }
 }

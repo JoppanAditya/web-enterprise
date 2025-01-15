@@ -41,12 +41,11 @@ class Perkuliahan extends CI_Controller
             $data = [
                 'nama_mata_kuliah' => $this->input->post('nama_mata_kuliah'),
                 'kelas' => $this->input->post('kelas'),
-                'dosen' => $this->input->post('dosen')
+                'dosen' => $this->input->post('dosen'),
+                'hari' => $this->input->post('hari'),
+                'waktu' => $this->input->post('waktu')
             ];
             $this->m_perkuliahan->insert_data($data);
-
-            // Update supervisor in kelas table
-            $this->m_kelas->update_supervisor($data['kelas'], $data['dosen']);
 
             $this->session->set_flashdata('success', 'Data berhasil ditambahkan');
             redirect('perkuliahan');
@@ -63,12 +62,11 @@ class Perkuliahan extends CI_Controller
             $data = [
                 'nama_mata_kuliah' => $this->input->post('nama_mata_kuliah'),
                 'kelas' => $this->input->post('kelas'),
-                'dosen' => $this->input->post('dosen')
+                'dosen' => $this->input->post('dosen'),
+                'hari' => $this->input->post('hari'),
+                'waktu' => $this->input->post('waktu')
             ];
             $this->m_perkuliahan->update_data($id, $data);
-
-            // Update supervisor in kelas table
-            $this->m_kelas->update_supervisor($data['kelas'], $data['dosen']);
 
             $this->session->set_flashdata('success', 'Data berhasil diupdate');
             redirect('perkuliahan');
@@ -87,5 +85,7 @@ class Perkuliahan extends CI_Controller
         $this->form_validation->set_rules('nama_mata_kuliah', 'Nama Mata Kuliah', 'required');
         $this->form_validation->set_rules('kelas', 'Kelas', 'required');
         $this->form_validation->set_rules('dosen', 'Dosen', 'required');
+        $this->form_validation->set_rules('hari', 'Hari', 'required');
+        $this->form_validation->set_rules('waktu', 'Waktu', 'required');
     }
 }

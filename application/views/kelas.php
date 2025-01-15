@@ -33,7 +33,6 @@
                             <tr align="center">
                                 <th>Nama Kelas</th>
                                 <th>Kapasitas</th>
-                                <th>Supervisor</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -42,7 +41,6 @@
                                 <tr align="center">
                                     <td><?= $k->nama; ?></td>
                                     <td><?= $k->kapasitas; ?></td>
-                                    <td><?= $k->supervisor; ?></td>
                                     <td>
                                         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $k->id; ?>"><i class="bi bi-pencil-square"></i></button>
                                         <a href="<?= base_url('kelas/hapus/' . $k->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus kelas ini?')"><i class="bi bi-trash"></i></a>
@@ -68,15 +66,6 @@
                                                     <label for="kapasitas" class="form-label">Kapasitas</label>
                                                     <input type="number" class="form-control" id="kapasitas" name="kapasitas" value="<?= $k->kapasitas; ?>">
                                                     <?= form_error('kapasitas', '<div class="text-danger">', '</div>'); ?>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="supervisor" class="form-label">Supervisor</label>
-                                                    <select class="form-control" id="supervisor" name="supervisor">
-                                                        <option value="">Pilih Supervisor</option>
-                                                        <?php foreach ($dosen as $d): ?>
-                                                            <option value="<?= $d->nama; ?>" <?= $d->nama == $k->supervisor ? 'selected' : ''; ?>><?= $d->nama; ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
